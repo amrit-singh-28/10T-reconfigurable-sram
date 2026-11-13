@@ -34,11 +34,6 @@ The high-threshold-voltage transistor N8 provides feedback during match-line dis
 
 ---
 
-## 3. Cadence Virtuoso Project Structure and Schematic Paths
-
-* **EDA Tool:** Cadence Virtuoso  
-* **Simulation Environment:** Spectre  
-* **Technology:** UMC 28 nm PDK (as used in the project setup)
 
 All schematics and simulation testbenches are organized inside the Cadence Virtuoso library.
 
@@ -63,25 +58,25 @@ All schematics and simulation testbenches are organized inside the Cadence Virtu
 
 ---
 
-## 4. Operations Implemented
+## 3. Operations Implemented
 
 The 10T SRAM architecture was verified for five major operations.
 
-### 4.1 Write Operation
+### 3.1 Write Operation
 * Data is written into the selected SRAM row.
 * WWL is activated.
 * WBL and WBLB carry complementary input data.
 * The cross-coupled inverter pair stores the data.  
 **Measured Energy:** 46.6 fJ/bit
 
-### 4.2 Row-wise Read
+### 3.2 Row-wise Read
 * The selected row is activated using RWL.
 * RBL and RBLB are precharged.
 * The stored data determines the differential bit-line discharge.
 * A differential sense amplifier detects the stored value.  
 **Measured Energy:** 26.52 fJ/bit
 
-### 4.3 Column-wise Read
+### 3.3 Column-wise Read
 * RWL lines are kept low.
 * RBL and RBLB of the selected column are driven.
 * The HBL voltage depends on the stored data.
@@ -89,14 +84,14 @@ The 10T SRAM architecture was verified for five major operations.
 * This operation also enables matrix transposition by writing data row-wise and reading it column-wise.  
 **Measured Energy:** 7.76 fJ/bit
 
-### 4.4 Binary CAM (BCAM) Search
+### 3.4 Binary CAM (BCAM) Search
 * RBL and RBLB act as search lines (SL and SLB).
 * The match line is precharged high.
 * If the stored data matches the search data, the match line remains high.
 * If a mismatch occurs, the match line discharges via the self-suppressed discharge mechanism, which limits the voltage swing.  
 **Measured Energy:** 0.64 fJ/bit/search
 
-### 4.5 In-Memory Computing (IMC)
+### 3.5 In-Memory Computing (IMC)
 * Two selected rows are activated simultaneously using their respective RWL signals.
 * The bit-line discharge pattern depends on the stored operands.
 * Two single-ended sense amplifiers resolve the computation result.
@@ -105,7 +100,7 @@ The 10T SRAM architecture was verified for five major operations.
 
 ---
 
-## 5. Simulation and Analysis
+## 4. Simulation and Analysis
 
 The following analyses were performed on the 16×16 SRAM array:
 
@@ -118,9 +113,9 @@ The following analyses were performed on the 16×16 SRAM array:
 
 ---
 
-## 6. Results and Observations
+## 5. Results and Observations
 
-### 6.1 Energy per Operation
+### 5.1 Energy per Operation
 
 | Operation | Energy |
 | :--- | ---: |
@@ -135,7 +130,7 @@ The following analyses were performed on the 16×16 SRAM array:
   * Column read consumes approximately **3.4 times less energy** than row read.
   * BCAM search is approximately **40 times more energy-efficient** than in-memory logic computation.
 
-### 6.2 Match-Line Discharge Analysis
+### 5.2 Match-Line Discharge Analysis
 
 | Number of Mismatches | ML Voltage |
 | ---: | ---: |
@@ -150,13 +145,13 @@ The following analyses were performed on the 16×16 SRAM array:
   * Increasing the mismatch count reduces the match-line voltage, but **even under the all-mismatch condition (16 mismatches), the match line does not discharge to 0 V**.
   * A sensing margin of approximately $623\text{ mV}$ is observed between the match and weakest mismatch cases, verifying the self-suppressed match-line discharge mechanism.
 
-### 6.3 Process Corner and Temperature Analysis
+### 5.3 Process Corner and Temperature Analysis
 * The match-line voltage follows the ordering $\text{SS} > \text{SF} > \text{TT} > \text{FS} > \text{FF}$ at every simulated temperature.
 * Slow NMOS process corners maintain a higher match-line voltage.
 * Match-line voltage decreases by approximately $83\text{--}91\text{ mV}$ as temperature increases from $-40^\circ\text{C}$ to $87^\circ\text{C}$.
 * The highest observed voltage is $\approx 435\text{ mV}$ at $\text{SS}$ and $-40^\circ\text{C}$, while the lowest is $\approx 218\text{ mV}$ at $\text{FF}$ and $87^\circ\text{C}$ (high-$V_{\text{th}}$ N8 implementation).
 
-### 6.4 Match-Line Delay
+### 5.4 Match-Line Delay
 
 | Process Corner | Reference Paper (ns) | Our Work (ns) |
 | :--- | ---: | ---: |
@@ -168,7 +163,7 @@ The following analyses were performed on the 16×16 SRAM array:
 
 * **Observations:** $\text{FF}$ exhibits the lowest delay, whereas $\text{SS}$ exhibits the highest. Our implementation follows the same trend as the reference paper with approximately **14–24% higher delay** across corners.
 
-### 6.5 Comparison with Reference Paper
+### 5.5 Comparison with Reference Paper
 
 | Metric | Reference Paper | Our Work |
 | :--- | ---: | ---: |
@@ -184,7 +179,7 @@ The following analyses were performed on the 16×16 SRAM array:
 
 ---
 
-## 7. Overall Conclusion
+## 6. Overall Conclusion
 
 The project successfully demonstrates the functionality of a reconfigurable 10T SRAM architecture supporting conventional SRAM operations, column-wise read, BCAM search, and in-memory computing. 
 
@@ -192,7 +187,7 @@ Simulations successfully verify the self-suppressed match-line discharge mechani
 
 ---
 
-## 8. Team Members & Credits
+## 7. Team Members & Credits
 
 * **Singh Amritkumar**
 * **Yash Choudhary**
@@ -203,6 +198,6 @@ Simulations successfully verify the self-suppressed match-line discharge mechani
 
 ---
 
-## 9. References
+## 8. References
 
 1. Z. Zhang et al., "Reconfigurable 10T SRAM for Energy-Efficient CAM Operation and In-Memory Computing," *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, Vol. 33, No. 4, April 2025.
